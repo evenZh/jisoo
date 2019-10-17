@@ -10,5 +10,4 @@ $api->version('v1', [
     require __DIR__.'/api/frontend.php';
 
 
-
 });
