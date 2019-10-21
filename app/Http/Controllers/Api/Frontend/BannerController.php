@@ -10,8 +10,15 @@ class BannerController extends Controller
 {
     public function getBanner($id)
     {
+        $bool = IdValidator($id);
+        if (!$bool) {
+            return response_fail('ID参数错误');
+        }
+
         $banner = Banner::query()->findOrFail($id);
 
         return response()->json($banner);
     }
+
+
 }
