@@ -12,4 +12,9 @@ class UserController extends Controller
         return 111;
 
     }
+
+    public function login()
+    {
+
+    }
 }
