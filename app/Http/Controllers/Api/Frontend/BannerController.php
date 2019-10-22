@@ -20,6 +20,11 @@ class BannerController extends Controller
         return response()->json($banner);
     }
 
+    public function list()
+    {
+        return Banner::query()->get();
+    }
+
 
 
 
