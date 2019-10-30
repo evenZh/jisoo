@@ -123,6 +123,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'img_prefix' => 'http://jisoo.test:9696/images',
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

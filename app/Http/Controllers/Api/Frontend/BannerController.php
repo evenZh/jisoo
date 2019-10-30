@@ -19,16 +19,10 @@ class BannerController extends Controller
             return response_fail('ID参数错误');
         }
 
-        $banner = Banner::query()->find($id);
+        $banner = Banner::query()->with(['items', 'items.image'])->findOrFail($id);
 
         return response_success($banner);
     }
-
-    public function list()
-    {
-        return Banner::query()->get();
-    }
-
 
 
 
