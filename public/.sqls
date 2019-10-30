@@ -1,0 +1,6 @@
+[2019-10-24 20:10:49]select * from `users` where `id` = ? limit 1
+parmars:[1]
+
+[2019-10-24 20:10:49]select * from `banner` where `banner`.`id` = ? limit 1
+parmars:["1"]
+

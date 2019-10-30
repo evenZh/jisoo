@@ -52,6 +52,12 @@ return [
             'level' => 'debug',
             'days' => 14,
         ],
+        'sql' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/sql.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
 
         'slack' => [
             'driver' => 'slack',

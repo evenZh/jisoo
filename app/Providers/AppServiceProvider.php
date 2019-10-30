@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
 
             // 用户认证异常
             if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
-                return response(response_json(401), 200);
+                return response(response_json(401), 401);
             }
 
             // 参数校验失败
@@ -31,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
                     $msg = $value[0];
                     break;
                 }
-                return response(response_json(200, $msg), 200);
+                return response(response_json(400, $msg), 400);
             }
 
             // dingo问题 路由不存在，自定义返回200，报错
@@ -68,6 +69,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // sql打印
+        if (env('APP_DEBUG') === true) {
+            \DB::listen(function ($query) {
+                \Log::channel('sql')->info($query->sql);
+                \Log::channel('sql')->info($query->bindings);
+                \Log::channel('sql')->info($query->time);
+            });
+        }
     }
 }
