@@ -37,6 +37,14 @@ class ProductController extends Controller
         return response_success();
     }
 
+    public function getAllInCategory(Request $request)
+    {
+        $products = Product::query()
+            ->where('category_id', $request->input('id'))
+            ->get();
+
+        return response_success($products);
+    }
 
 
 

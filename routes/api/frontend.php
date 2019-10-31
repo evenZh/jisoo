@@ -17,9 +17,11 @@ $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api
     $api->get('theme/index', 'ThemeController@index');
     $api->get('theme/detail', 'ThemeController@detail');
 
-    // 最近新品
+    // 商品
     $api->get('product/recent', 'ProductController@recent');
     $api->get('product/update', 'ProductController@update');
+    $api->get('product/getAllInCategory', 'ProductController@getAllInCategory');
+
 
     // 菜单
     $api->get('category/index', 'CategoryController@index');

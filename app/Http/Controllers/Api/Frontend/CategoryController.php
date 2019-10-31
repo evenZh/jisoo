@@ -18,5 +18,5 @@ class CategoryController extends Controller
         return response_success($category_list);
     }
 
-    
+
 }
