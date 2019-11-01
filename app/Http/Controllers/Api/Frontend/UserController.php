@@ -3,32 +3,41 @@
 namespace App\Http\Controllers\Api\Frontend;
 
 use App\Models\User;
+use App\Services\WechatToken;
+use EasyWeChat\Factory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function list()
-    {
-        return 111;
-
-    }
-
     public function token()
     {
         $user = User::query()->first();
         return auth('api')->login($user);
     }
 
-    public function update()
+    // get token
+    public function wechatToken(Request $request, WechatToken $wechatToken)
     {
-        User::query()
-            ->where('id', 1)
-            ->update([
-                'open_id' => 123456,
-                'nickname' => 'jisoo'
-            ]);
+        $this->validate($request, [
+            'code' => 'required'
+        ], [
+            'code.*' => '请输入code'
+        ]);
 
-        return response_success();
+        $app = Factory::miniProgram(config('wechat.mini_program.default'));
+
+        $wx_result = $app->auth->session($request->input('code'));
+
+        if (isset($wx_result['errcode'])) {
+            return response_fail('无法换取openid，检查code');
+        }
+
+        $user_token = $wechatToken->userToken($wx_result);
+
+        return response_success($user_token);
     }
+
+
+
 }

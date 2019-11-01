@@ -27,6 +27,9 @@ $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api
     $api->get('category/index', 'CategoryController@index');
 
 
+    $api->post('wechat/token', 'UserController@wechatToken');
+
+
 
     $api->group(['middleware' => 'auth:api'],  function($api) {
 
