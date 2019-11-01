@@ -21,22 +21,6 @@ class ProductController extends Controller
         return response_success($recent_product);
     }
 
-    public function update()
-    {
-//        $products = Product::query()->get();
-//
-//        foreach ($products as $product) {
-//            $product->created_at = now()->toDateTimeString();
-//            $product->save();
-//        }
-
-        // 性能更高的批量更新
-//        Product::query()->update([
-//            'created_at' => now()->toDateTimeString()
-//        ]);
-        return response_success();
-    }
-
     public function getAllInCategory(Request $request)
     {
         $products = Product::query()
@@ -46,6 +30,14 @@ class ProductController extends Controller
         return response_success($products);
     }
 
+    public function detail(Request $request)
+    {
+        $product = Product::query()
+            ->with(['images.image', 'properties'])
+            ->find($request->input('id'));
+
+        return response_success($product);
+    }
 
 
 

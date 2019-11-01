@@ -12,7 +12,7 @@ class Product extends Model
         'pivot', 'created_at', 'updated_at'
     ];
 
-
+    // 商品主图
     public function getMainImgUrlAttribute($value)
     {
         // 如果是图床图片直接返回url 否则拼接url
@@ -21,6 +21,18 @@ class Product extends Model
         } else {
             return config('app.img_prefix') . $value;
         }
+    }
+
+    // 商品详情图
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id', 'id');
+    }
+
+    // 参数
+    public function properties()
+    {
+        return $this->hasMany(ProductProperty::class, 'product_id', 'id');
     }
 
 }

@@ -19,8 +19,8 @@ $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api
 
     // 商品
     $api->get('product/recent', 'ProductController@recent');
-    $api->get('product/update', 'ProductController@update');
     $api->get('product/getAllInCategory', 'ProductController@getAllInCategory');
+    $api->get('product/detail', 'ProductController@detail');
 
 
     // 菜单
@@ -28,6 +28,8 @@ $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api
 
 
     $api->post('wechat/token', 'UserController@wechatToken');
+
+    $api->get('cache', 'UserController@cache');
 
 
 
