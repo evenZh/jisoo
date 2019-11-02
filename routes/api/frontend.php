@@ -10,8 +10,9 @@ $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api
     $api->post('update', 'UserController@update');
 
     // banner
+    $api->get('banner/test', 'BannerController@test');
+
     $api->get('banner/{id}', 'BannerController@getBanner');
-    $api->post('banner/list', 'BannerController@list');
 
     // 主题
     $api->get('theme/index', 'ThemeController@index');
@@ -26,12 +27,10 @@ $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api
     // 菜单
     $api->get('category/index', 'CategoryController@index');
 
-
     $api->post('wechat/token', 'UserController@wechatToken');
 
-    $api->get('cache', 'UserController@cache');
-
-
+    // 用户地址
+    $api->post('wechat/token', 'UserController@wechatToken');
 
     $api->group(['middleware' => 'auth:api'],  function($api) {
 

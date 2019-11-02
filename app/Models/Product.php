@@ -26,7 +26,7 @@ class Product extends Model
     // 商品详情图
     public function images()
     {
-        return $this->hasMany(ProductImage::class, 'product_id', 'id');
+        return $this->hasMany(ProductImage::class, 'product_id', 'id')->orderBy('order', 'asc');
     }
 
     // 参数

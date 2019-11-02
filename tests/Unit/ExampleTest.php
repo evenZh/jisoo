@@ -14,6 +14,7 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
+        \Log::info('test');
         $this->assertTrue(true);
     }
 }

@@ -38,12 +38,6 @@ class UserController extends Controller
         return response_success($user_token);
     }
 
-    public function cache()
-    {
-        $cache_value = \Cache::get('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9qaXNvby50ZXN0Ojk2OTZcL2FwaVwvZnJvbnRlbmRcL3dlY2hhdFwvdG9rZW4iLCJpYXQiOjE1NzI2MTI4NTAsImV4cCI6MTU3NjIxMjg1MCwibmJmIjoxNTcyNjEyODUwLCJqdGkiOiJDc2dlWFFrT3YzdVNLTUxNIiwic3ViIjoyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.3MOIaxs-RgThKptWPUf0s9QTmRCYvmXoc3JHCvI5e_M');
-        return json_decode($cache_value, true);
-    }
-
 
 
 }

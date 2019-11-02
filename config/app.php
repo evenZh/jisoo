@@ -123,6 +123,7 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    // 本地图片前缀
     'img_prefix' => 'http://jisoo.test:9696/images',
 
     /*
