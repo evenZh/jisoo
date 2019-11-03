@@ -30,7 +30,8 @@ $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api
     $api->post('wechat/token', 'UserController@wechatToken');
 
     // 用户地址
-    $api->post('wechat/token', 'UserController@wechatToken');
+    $api->post('user/address', 'UserAddressController@createOrUpdate');
+
 
     $api->group(['middleware' => 'auth:api'],  function($api) {
 

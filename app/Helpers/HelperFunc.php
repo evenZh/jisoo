@@ -23,6 +23,17 @@ function IdValidator($id)
 }
 
 
+function model_save($model, $map)
+{
+    foreach ($map as $k => $v) {
+        $model[$k] = $v;
+    }
+    $model->save();
+
+    return $model;
+}
+
+
 
 
 

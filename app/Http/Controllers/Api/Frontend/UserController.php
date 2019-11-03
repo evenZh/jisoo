@@ -16,7 +16,7 @@ class UserController extends Controller
         return auth('api')->login($user);
     }
 
-    // get token
+    // 获取token
     public function wechatToken(Request $request, WechatToken $wechatToken)
     {
         $this->validate($request, [

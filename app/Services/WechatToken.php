@@ -38,6 +38,12 @@ class WechatToken
         ];
     }
 
+    /**
+     * 生成cache值
+     * @param $wx_result
+     * @param $uid
+     * @return array
+     */
     public function makeCacheValue($wx_result, $uid)
     {
         $cache_value = [];
@@ -46,5 +52,6 @@ class WechatToken
 
         return $cache_value;
     }
+
 
 }
