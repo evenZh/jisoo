@@ -32,6 +32,9 @@ $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api
     // 用户地址
     $api->post('user/address', 'UserAddressController@createOrUpdate');
 
+    // 订单
+    $api->post('order/create', 'OrderController@create');
+
 
     $api->group(['middleware' => 'auth:api'],  function($api) {
 
