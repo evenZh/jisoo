@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api\Frontend;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderRequest;
+use App\Models\UserAddress;
+use App\Services\OrderService;
 
 class OrderController extends Controller
 {
@@ -12,28 +14,31 @@ class OrderController extends Controller
 
     }
 
-    public function create(Request $request)
+    public function create(OrderRequest $orderRequest, OrderService $orderService)
     {
-        $this->validate($request, [
-            'products' => 'required|array|min:1'
+        $user = auth('api')->user();
 
-        ], [
-            'products.*' => '商品信息错误'
-        ]);
+        $user_address = UserAddress::query()
+            ->where('user_id', $user['id'])
+            ->first();
 
-        $products = $request->input('products');
+        $full_address = $user_address->full_address;
 
-        foreach ($products as $product) {
-            $validator = \Validator::make($product, [
+        $address = [
+            'name' => $user_address['name'],
+            'phone' => $user_address['phone'],
+            'full_address' => $full_address
+        ];
 
-            ], [
+        $order_products = $orderRequest->input('products');
 
-            ]);
-            if ($validator->fails()) {
-
-            }
+        try {
+            $order = $orderService->createOrder($user, $order_products, $address);
+        } catch (\Exception $exception) {
+            return response_fail($exception->getMessage());
         }
 
+        return $order;
     }
 
 
