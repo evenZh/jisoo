@@ -12,6 +12,7 @@ class Order extends Model
         'snap_address' => 'array',
         'snap_img' => 'array',
         'snap_name' => 'array',
+        'snap_items' => 'array',
     ];
 
 }

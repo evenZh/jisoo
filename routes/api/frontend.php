@@ -5,6 +5,8 @@
 $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api){
 
     $api->get('user/list', 'UserController@list');
+    $api->get('user/orders', 'UserController@orders');
+
     $api->post('token', 'UserController@token');
 
     $api->post('update', 'UserController@update');

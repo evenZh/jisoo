@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use App\Services\WechatToken;
 use EasyWeChat\Factory;
@@ -36,6 +37,18 @@ class UserController extends Controller
         $user_token = $wechatToken->userToken($wx_result);
 
         return response_success($user_token);
+    }
+
+    public function orders()
+    {
+        $user = auth('api')->user();
+
+        $orders = Order::query()
+            ->where('user_id', $user['id'])
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return response_success($orders);
     }
 
 

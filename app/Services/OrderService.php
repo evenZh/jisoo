@@ -18,12 +18,17 @@ class OrderService
 
         $total_price = 0;
 
+        $snap_items = [];
+
+
         foreach ($order_products as $order_product) {
             $product = Product::query()
                 ->find($order_product['product_id']);
 
             $price = $product['price'] * $order_product['count'];
             $total_price += $price;
+
+            $snap_items[] = $product;
         }
 
         DB::beginTransaction();
@@ -33,7 +38,8 @@ class OrderService
                 'order_no' => $order_no,
                 'user_id' => $user['id'],
                 'total_price' => $total_price,
-                'snap_address' => $address
+                'snap_address' => $address,
+                'snap_items' => $snap_items
             ];
 
             $order = model_save(new Order(), $order_map);
