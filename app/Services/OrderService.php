@@ -14,21 +14,25 @@ class OrderService
 {
     public function createOrder($user, $order_products, $address)
     {
-        $order_no = date('YmdHis') . mt_rand(111111, 999999);
-
+        $order_no = date('YmdHis') . mt_rand(111111, 999999) . get_rand_number();
         $total_price = 0;
-
         $snap_items = [];
 
-
-        foreach ($order_products as $order_product) {
+        foreach ($order_products as $key => $order_product) {
             $product = Product::query()
                 ->find($order_product['product_id']);
-
             $price = $product['price'] * $order_product['count'];
             $total_price += $price;
-
             $snap_items[] = $product;
+
+            if ($key == 0) {
+                $snap_name = $product['name'];
+                $snap_img = $product['main_img_url'];
+            }
+        }
+
+        if (count($order_products) > 1) {
+            $snap_name .= '等';
         }
 
         DB::beginTransaction();
@@ -39,7 +43,9 @@ class OrderService
                 'user_id' => $user['id'],
                 'total_price' => $total_price,
                 'snap_address' => $address,
-                'snap_items' => $snap_items
+                'snap_items' => $snap_items,
+                'snap_name' => $snap_name,
+                'snap_img' => $snap_img
             ];
 
             $order = model_save(new Order(), $order_map);
@@ -58,11 +64,10 @@ class OrderService
                 $order_product_map[] = [
                     'order_id' => $order['id'],
                     'product_id' => $order_product['product_id'],
-                    'count' => $order_product['count']
+                    'count' => $order_product['count'],
+                    'created_at' => $order['created_at']
                 ];
-
             }
-
             OrderProduct::query()->insert($order_product_map);
 
             DB::commit();

@@ -9,11 +9,6 @@ use App\Services\OrderService;
 
 class OrderController extends Controller
 {
-    public function myOrders()
-    {
-
-    }
-
     public function create(OrderRequest $orderRequest, OrderService $orderService)
     {
         $user = auth('api')->user();
