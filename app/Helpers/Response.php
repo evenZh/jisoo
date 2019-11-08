@@ -38,7 +38,7 @@ function response_fail($msg = null)
  */
 function response_success($data = null)
 {
-    return response_json(0, 'success', $data);
+    return response_json(0, '成功', $data);
 }
 
 

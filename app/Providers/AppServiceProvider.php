@@ -57,7 +57,7 @@ class AppServiceProvider extends ServiceProvider
             }
 
             //其他异常
-            return response(response_json(500), 200);
+            return response(response_json(666), 200);
 
         });
     }

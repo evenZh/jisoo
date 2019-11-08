@@ -101,6 +101,17 @@ return [
          ],
      ],
 
+    'payment' => [
+        'wx_mini' => [
+            'app_id'             => env('WECHAT_MINI_PROGRAM_APPID', ''),
+            'mch_id'             => env('WECHAT_PAYMENT_MCH_ID', 'your-mch-id'),
+            'key'                => env('WECHAT_PAYMENT_KEY', 'key-for-signature'),
+            'cert_path'          => resource_path('cert') . '/apiclient_cert.pem',    // XXX: 绝对路径！！！！
+            'key_path'           => resource_path('cert') . '/apiclient_key.pem',     // XXX: 绝对路径！！！！
+            'notify_url'         => env('APP_URL')."/api/frontend/order/wxMiniNotify",      // 默认支付结果通知地址
+        ],
+    ],
+
     /*
      * 微信支付
      */

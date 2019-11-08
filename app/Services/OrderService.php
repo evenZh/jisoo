@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use DB;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OrderService
 {
@@ -18,9 +19,17 @@ class OrderService
         $total_price = 0;
         $snap_items = [];
 
+        DB::beginTransaction();
+
+        try {
         foreach ($order_products as $key => $order_product) {
             $product = Product::query()
                 ->find($order_product['product_id']);
+
+            if ($product->decrement($order_product['count'])) {
+                throw new \Exception('商品库存不足');
+            }
+
             $price = $product['price'] * $order_product['count'];
             $total_price += $price;
             $snap_items[] = $product;
@@ -35,9 +44,7 @@ class OrderService
             $snap_name .= '等';
         }
 
-        DB::beginTransaction();
 
-        try {
             $order_map = [
                 'order_no' => $order_no,
                 'user_id' => $user['id'],
@@ -79,5 +86,6 @@ class OrderService
 
         return $order;
     }
+
 
 }

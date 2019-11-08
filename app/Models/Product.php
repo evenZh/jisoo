@@ -35,4 +35,25 @@ class Product extends Model
         return $this->hasMany(ProductProperty::class, 'product_id', 'id');
     }
 
+    public function decreaseStock($amount)
+    {
+        if ($amount < 0) {
+            throw new \Exception('减库存量不能为0');
+        }
+
+        return $this->newQuery()
+            ->where('id', $this->id)
+            ->where('stock', '>=', $amount)
+            ->decrement('stock', $amount);
+    }
+
+    public function increaseStock($amount)
+    {
+        if ($amount < 0) {
+            throw new \Exception('加库存量不能为0');
+        }
+
+        return $this->increment('stock', $amount);
+    }
+
 }

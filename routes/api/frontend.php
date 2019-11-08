@@ -37,6 +37,11 @@ $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api
     // 订单
     $api->post('order/create', 'OrderController@create');
 
+    $api->post('order/pay', 'PayController@pay');
+    $api->post('order/wxMiniNotify', 'PayController@wxMiniNotify');
+    // 余额支付
+    $api->post('order/payByBalance', 'PayController@payByBalance');
+
 
     $api->group(['middleware' => 'auth:api'],  function($api) {
 
