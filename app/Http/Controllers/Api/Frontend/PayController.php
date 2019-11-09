@@ -8,11 +8,13 @@ use App\Http\Controllers\Controller;
 
 class PayController extends Controller
 {
-    public function pay(PayService $payService)
+    // 微信支付
+    public function payByWx(PayService $payService)
     {
 
     }
 
+    // 余额支付
     public function payByBalance(Request $request)
     {
         $this->validate($request, [

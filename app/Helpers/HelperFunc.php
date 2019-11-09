@@ -33,6 +33,14 @@ function model_save($model, $map)
     return $model;
 }
 
+// 自定义分页
+function custom_paginate($model, $page, $limit = 5)
+{
+    $start = $limit * ($page - 1);
+
+    return $model->limit($limit)->offset($start)->get();
+}
+
 
 
 

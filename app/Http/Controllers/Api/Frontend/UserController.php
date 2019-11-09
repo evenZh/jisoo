@@ -41,14 +41,17 @@ class UserController extends Controller
     }
 
     // 用户的订单
-    public function orders()
+    public function orders(Request $request)
     {
+        $page = $request->input('page', 1);
+
         $user = auth('api')->user();
 
         $orders = Order::query()
             ->where('user_id', $user['id'])
-            ->orderBy('id', 'desc')
-            ->get();
+            ->orderBy('id', 'desc');
+
+        $orders = custom_paginate($orders, $page);
 
         return response_success($orders);
     }

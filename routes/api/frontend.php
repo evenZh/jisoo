@@ -5,15 +5,11 @@
 $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api){
 
     $api->get('user/list', 'UserController@list');
-    $api->get('user/orders', 'UserController@orders');
 
     $api->post('token', 'UserController@token');
 
-    $api->post('update', 'UserController@update');
-
     // banner
     $api->get('banner/test', 'BannerController@test');
-
     $api->get('banner/{id}', 'BannerController@getBanner');
 
     // 主题
@@ -24,7 +20,6 @@ $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api
     $api->get('product/recent', 'ProductController@recent');
     $api->get('product/getAllInCategory', 'ProductController@getAllInCategory');
     $api->get('product/detail', 'ProductController@detail');
-
 
     // 菜单
     $api->get('category/index', 'CategoryController@index');
@@ -37,15 +32,18 @@ $api->group(['prefix' => '/frontend', 'namespace' => 'Frontend'], function ($api
     // 订单
     $api->post('order/create', 'OrderController@create');
 
-    $api->post('order/pay', 'PayController@pay');
+    // 微信支付
+    $api->post('order/payByWx', 'PayController@payByWx');
+
+    // 微信回调
     $api->post('order/wxMiniNotify', 'PayController@wxMiniNotify');
+
     // 余额支付
     $api->post('order/payByBalance', 'PayController@payByBalance');
 
 
     $api->group(['middleware' => 'auth:api'],  function($api) {
-
-
+        $api->get('user/orders', 'UserController@orders');
 
 
 

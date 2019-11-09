@@ -20,7 +20,7 @@ class BannerController extends Controller
             return response_fail('ID参数错误');
         }
 
-        $banner = Banner::query()->with(['items', 'items.image'])->findOrFail($id);
+        $banner = Banner::query()->with(['items.image'])->findOrFail($id);
 
         return response_success($banner);
     }

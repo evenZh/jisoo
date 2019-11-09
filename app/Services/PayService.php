@@ -10,7 +10,7 @@ use EasyWeChat\Factory;
 
 class PayService
 {
-    public function wxMiniPay($order_no, $price, $body = null, $openid)
+    public function wxMiniPay($order_no, $price, $body, $openid)
     {
         $app = Factory::payment(config('wechat.payment.wx_mini'));
 
@@ -25,7 +25,7 @@ class PayService
 
         if ($result['return_code'] != 'SUCCESS' || $result['result_code'] != 'SUCCESS') {
             \Log::info($result);
-            return response_fail('订单创建失败');
+            return response_fail('微信支付订单创建失败');
         }
 
         $result = $app->jssdk->bridgeConfig($result['prepay_id'], false);
@@ -36,7 +36,7 @@ class PayService
     {
         $order = Order::query()
             ->where('order_no', $order_no)
-            ->firstOrFail();
+            ->first();
 
         $success_num = Order::query()
             ->where('id', $order['id'])
