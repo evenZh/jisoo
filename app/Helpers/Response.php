@@ -42,12 +42,7 @@ function response_success($data = null)
 }
 
 
-function get_rand_number()
-{
-    $array = range(0, 9);
-    $number = $array[mt_rand(0, 9)] . $array[mt_rand(0, 9)] . $array[mt_rand(0, 9)];
-    return $number;
-}
+
 
 
 

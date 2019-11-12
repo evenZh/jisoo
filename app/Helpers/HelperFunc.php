@@ -41,6 +41,14 @@ function custom_paginate($model, $page, $limit = 5)
     return $model->limit($limit)->offset($start)->get();
 }
 
+// 获取随机数
+function get_rand_number()
+{
+    $array = range(0, 9);
+    $number = $array[mt_rand(0, 9)] . $array[mt_rand(0, 9)] . $array[mt_rand(0, 9)];
+    return $number;
+}
+
 
 
 
