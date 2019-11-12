@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
@@ -16,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         // api异常处理
         app('Dingo\Api\Exception\Handler')->register(function (\Exception $exception) {
+            // 转发异常处理
+//            $request = Request::capture();
+//            return app('App\Exceptions\Handler')->render($request, $exception);
 
             // 打印错误日志
             \Log::error($exception);
@@ -56,7 +60,7 @@ class AppServiceProvider extends ServiceProvider
                 return response(response_json($status_code), 200);
             }
 
-            //其他异常
+            // 其他异常
             return response(response_json(500), 200);
 
         });
