@@ -9,7 +9,7 @@ class Image extends Model
     protected $table = 'image';
 
     protected $hidden = [
-        'updated_at', 'created_at', 'from', 'id'
+        'updated_at', 'created_at', 'id'
     ];
 
     // 拼接图片url 读取器的使用
